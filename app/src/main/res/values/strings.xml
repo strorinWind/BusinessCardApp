@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BusinessCardApp</string>
+    <string name="person_name">Anastasia Sakunova</string>
+    <string name="kas_lab_description">Intern, Mobile Solutions Testing</string>
+    <string name="hse_description">Student</string>
+    <string name="person_description">Anastasia studies in university for Bachelor degree.
+        At the moment she works at Kaspersky Lab as an Intern in automated testing.</string>
+    <string name="text_input_hint">Enter a message...</string>
+    <string name="send_button_text">Send message</string>
+</resources>
