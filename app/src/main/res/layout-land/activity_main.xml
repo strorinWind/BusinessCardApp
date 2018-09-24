@@ -14,21 +14,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:focusable="true"
             android:focusableInTouchMode="true">
 
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/avatar_height"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
                 android:scaleType="centerCrop"
                 android:src="@drawable/avatar" />
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/record_margin_start"
+                android:layout_weight="5"
                 android:padding="@dimen/standart_margin">
 
                 <LinearLayout
