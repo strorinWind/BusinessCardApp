@@ -81,7 +81,7 @@
                 android:layout_height="@dimen/baseline_height"
                 android:layout_below="@id/study_place"
                 android:layout_margin="@dimen/standart_margin"
-                android:background="@android:color/holo_red_dark" />
+                android:background="#ff0000" />
 
             <TextView
                 android:id="@+id/person_info_text"
@@ -103,7 +103,7 @@
                 android:layout_marginRight="@dimen/standart_margin"
                 android:layout_marginStart="@dimen/standart_margin"
                 android:layout_marginTop="@dimen/standart_margin"
-                android:background="@android:color/holo_red_dark" />
+                android:background="#ff0000" />
 
             <EditText
                 android:id="@+id/email_text"
