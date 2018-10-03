@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:scaleType="centerCrop"
+            android:src="@drawable/avatar" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/record_margin_start"
+            android:layout_weight="5"
+            android:padding="@dimen/standart_margin">
+
+            <LinearLayout
+                android:id="@+id/work_place"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/record_height"
+                android:layout_margin="@dimen/standart_margin"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/record_height"
+                    android:layout_height="@dimen/record_height"
+                    android:src="@drawable/kaslab" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/standart_margin"
+                    android:gravity="center_vertical"
+                    android:text="@string/kas_lab_description"
+                    android:textSize="@dimen/standart_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/study_place"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/record_height"
+                android:layout_below="@id/work_place"
+                android:layout_margin="@dimen/standart_margin"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/record_height"
+                    android:layout_height="@dimen/record_height"
+                    android:src="@drawable/hse" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/standart_margin"
+                    android:gravity="center_vertical"
+                    android:text="@string/hse_description"
+                    android:textSize="@dimen/standart_text_size" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/header_baseline"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/baseline_height"
+                android:layout_below="@id/study_place"
+                android:layout_margin="@dimen/standart_margin"
+                android:background="@color/baselineColor" />
+
+            <TextView
+                android:id="@+id/person_info_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/header_baseline"
+                android:layout_margin="@dimen/standart_margin"
+                android:text="@string/person_description"
+                android:textSize="@dimen/standart_text_size" />
+
+            <View
+                android:id="@+id/footer_baseline"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/baseline_height"
+                android:layout_below="@id/person_info_text"
+                android:layout_marginBottom="@dimen/standart_margin"
+                android:layout_marginEnd="@dimen/standart_margin"
+                android:layout_marginLeft="@dimen/standart_margin"
+                android:layout_marginRight="@dimen/standart_margin"
+                android:layout_marginStart="@dimen/standart_margin"
+                android:layout_marginTop="@dimen/standart_margin"
+                android:background="@color/baselineColor" />
+
+            <EditText
+                android:id="@+id/email_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/footer_baseline"
+                android:layout_margin="@dimen/standart_margin"
+                android:hint="@string/text_input_hint"
+                android:inputType="textCapSentences|textMultiLine"
+                android:layout="@id/footer_baseline"
+                android:textSize="@dimen/standart_text_size" />
+
+            <Button
+                android:id="@+id/send_button"
+                style="@style/Base.TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/send_button_height"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/email_text"
+                android:layout_margin="@dimen/standart_margin"
+                android:background="@android:color/transparent"
+                android:text="@string/send_button_text"
+                android:textSize="@dimen/standart_text_size" />
+
+            <ImageView
+                android:id="@+id/tg"
+                android:layout_width="@dimen/record_height"
+                android:layout_height="@dimen/record_height"
+                android:layout_below="@id/send_button"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/standart_margin"
+                android:src="@drawable/tg" />
+
+            <ImageView
+                android:id="@+id/vk"
+                android:layout_width="@dimen/record_height"
+                android:layout_height="@dimen/record_height"
+                android:layout_below="@id/send_button"
+                android:layout_margin="@dimen/standart_margin"
+                android:layout_toLeftOf="@id/tg"
+                android:src="@drawable/vk" />
+
+            <ImageView
+                android:id="@+id/habr"
+                android:layout_width="@dimen/record_height"
+                android:layout_height="@dimen/record_height"
+                android:layout_below="@id/send_button"
+                android:layout_margin="@dimen/standart_margin"
+                android:layout_toRightOf="@id/tg"
+                android:src="@drawable/habr" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

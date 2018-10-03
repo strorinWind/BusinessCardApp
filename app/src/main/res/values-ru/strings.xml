@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BusinessCardApp</string>
+    <string name="person_name">Анастасия Сакунова</string>
+    <string name="kas_lab_description">Стажер, Тестирование мобильных решений</string>
+    <string name="hse_description">Студент</string>
+    <string name="person_description">Анастасия сейчас учится в университете.
+        В данный момент работает в Лаборатории Касперского в автоматизированном тестировании.</string>
+    <string name="text_input_hint">Введите сообщение...</string>
+    <string name="send_button_text">Отправить сообщение</string>
+</resources>

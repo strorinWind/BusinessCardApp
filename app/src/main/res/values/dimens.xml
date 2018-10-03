@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="avatar_height">250dp</dimen>
+    <dimen name="record_height">28dp</dimen>
+    <dimen name="record_margin_start">34dp</dimen>
+    <dimen name="standart_margin">8dp</dimen>
+    <dimen name="margin_end">16dp</dimen>
+    <dimen name="baseline_height">3dp</dimen>
+    <dimen name="send_button_height">25dp</dimen>
+    <dimen name="standart_text_size">16sp</dimen>
+</resources>
