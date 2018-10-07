@@ -9,4 +9,5 @@
     <string name="send_button_text">Send message</string>
     <string name="no_email_app_error">No Email app found</string>
     <string name="no_web_browser_error">No web browser found</string>
+    <string name="about_title">About</string>
 </resources>

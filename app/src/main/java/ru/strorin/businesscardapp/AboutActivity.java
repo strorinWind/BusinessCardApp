@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
     private static final String[] EXTRA_EMAIL_ADDRESSES = {"strorinw@gmail.com"};
     private static final String EXTRA_EMAIL_SUBJECT = "Feedback";
 
