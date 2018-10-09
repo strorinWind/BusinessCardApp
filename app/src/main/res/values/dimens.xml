@@ -10,8 +10,11 @@
     <dimen name="send_button_height">25dp</dimen>
     <dimen name="standart_text_size">16sp</dimen>
 
-    <dimen name="news_item_height">216dp</dimen>
+    <dimen name="news_item_height">200dp</dimen>
     <dimen name="news_category_text_size">16sp</dimen>
     <dimen name="news_header_text_size">14sp</dimen>
     <dimen name="news_date_text_size">12sp</dimen>
+    <dimen name="news_image_size">112dp</dimen>
+
+    <dimen name="divider_size">4dp</dimen>
 </resources>

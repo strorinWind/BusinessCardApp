@@ -62,9 +62,10 @@
         </LinearLayout>
 
         <ImageView
+            android:layout_gravity="center"
             android:id="@+id/news_image"
-            android:layout_width="110dp"
-            android:layout_height="match_parent"
+            android:layout_width="@dimen/news_image_size"
+            android:layout_height="@dimen/news_image_size"
             android:scaleType="centerCrop"
             tools:src="@tools:sample/avatars"/>
     </LinearLayout>
