@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration;
 
@@ -23,8 +22,7 @@ import ru.strorin.businesscardapp.data.DataUtils;
 public class NewListActivity extends AppCompatActivity {
 
     private final NewsItemRecyclerAdapter.OnItemClickListener clickListener = newsItem -> {
-        String clickMessage = "Clicked " + newsItem.getTitle();
-        Toast.makeText(this, clickMessage, Toast.LENGTH_SHORT).show();
+        NewsDetailsActivity.start(this, newsItem);
     };
 
     @Override
