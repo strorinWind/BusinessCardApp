@@ -92,7 +92,7 @@ public class NewsItemRecyclerAdapter extends RecyclerView.Adapter<NewsItemRecycl
             categoryView.setText(newsItem.getCategory().getName());
             headerView.setText(newsItem.getTitle());
             previewView.setText(newsItem.getPreviewText());
-            dateView.setText(newsItem.getPublishDate().toString());
+            dateView.setText(newsItem.getPrettyDateString());
         }
     }
 }

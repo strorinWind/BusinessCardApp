@@ -1,5 +1,7 @@
 package ru.strorin.businesscardapp.data;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -35,6 +37,11 @@ public class NewsItem implements Serializable {
 
     public Date getPublishDate() {
         return publishDate;
+    }
+
+    public String getPrettyDateString() {
+        PrettyTime p = new PrettyTime();
+        return p.format(publishDate);
     }
 
     public String getPreviewText() {

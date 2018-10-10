@@ -50,6 +50,6 @@ public class NewsDetailsActivity extends AppCompatActivity {
         setTitle(newsItem.getCategory().getName());
         headerView.setText(newsItem.getTitle());
         newsTextView.setText(newsItem.getFullText());
-        dateView.setText(newsItem.getPublishDate().toString());
+        dateView.setText(newsItem.getPrettyDateString());
     }
 }
