@@ -64,11 +64,11 @@ public class NewsItemRecyclerAdapter extends RecyclerView.Adapter<NewsItemRecycl
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        public final ImageView newsImageView;
-        public final TextView categoryView;
-        public final TextView headerView;
-        public final TextView previewView;
-        public final TextView dateView;
+        private final ImageView newsImageView;
+        private final TextView categoryView;
+        private final TextView headerView;
+        private final TextView previewView;
+        private final TextView dateView;
 
 
         ViewHolder(View itemView, @Nullable OnItemClickListener listener) {

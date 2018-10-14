@@ -9,6 +9,9 @@ import android.view.MenuItem;
 
 import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -17,9 +20,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import ru.strorin.businesscardapp.data.DataUtils;
+import ru.strorin.businesscardapp.data.NewsItem;
 
 
 public class NewListActivity extends AppCompatActivity {
+    private List<NewsItem> news = new ArrayList<>();
 
     private final NewsItemRecyclerAdapter.OnItemClickListener clickListener = newsItem -> {
         NewsDetailsActivity.start(this, newsItem);
@@ -30,11 +35,16 @@ public class NewListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_list);
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        recyclerView.setAdapter(new NewsItemRecyclerAdapter(this,
-                DataUtils.generateNews(), clickListener));
-
-        setRecyclerViewDecoration(recyclerView);
+        new Thread(() -> {
+            news = DataUtils.generateNews();
+            System.out.println(Thread.currentThread());
+            runOnUiThread(() -> {
+                RecyclerView recyclerView = findViewById(R.id.recycler_view);
+                recyclerView.setAdapter(new NewsItemRecyclerAdapter(this,
+                        news, clickListener));
+                setRecyclerViewDecoration(recyclerView);
+            });
+        }).start();
     }
 
     private void setRecyclerViewDecoration(RecyclerView recyclerView){
