@@ -30,7 +30,7 @@
                 android:maxLines="1"
                 android:textAllCaps="true"
                 android:textSize="@dimen/news_category_text_size"
-                tools:text="Darwin awards" />
+                tools:text="@tools:sample/lorem/random" />
 
             <TextView
                 android:id="@+id/header_text"
@@ -42,7 +42,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/news_header_text_size"
                 android:textStyle="bold"
-                tools:text="Tourist filmed sitting on 5m-long crocodile" />
+                tools:text="@tools:sample/lorem/random" />
 
             <TextView
                 android:id="@+id/preview_text"
@@ -60,7 +60,7 @@
                 android:layout_margin="@dimen/standart_margin"
                 android:maxLines="1"
                 android:textSize="@dimen/news_date_text_size"
-                tools:text="4 hr. ago, 10:34 AM" />
+                tools:text="@tools:sample/date/mmddyy" />
         </LinearLayout>
 
         <ImageView
