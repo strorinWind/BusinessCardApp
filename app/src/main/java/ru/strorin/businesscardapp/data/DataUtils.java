@@ -132,12 +132,6 @@ public class DataUtils {
                         + "were Goodnight Girl and Love Is All Around.\""
         ));
 
-        try {
-            Thread.sleep(2000);
-        }
-        catch (InterruptedException e){
-            e.printStackTrace();
-        }
         return news;
     }
 

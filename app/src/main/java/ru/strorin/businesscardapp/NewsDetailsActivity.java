@@ -23,7 +23,10 @@ public class NewsDetailsActivity extends AppCompatActivity {
 
     public static void start(Activity activity, NewsItem item){
         Intent newsDetailsActivityIntent = new Intent(activity, NewsDetailsActivity.class);
-        newsDetailsActivityIntent.putExtra(NEWS_ITEM, item);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(NEWS_ITEM, item);
+        newsDetailsActivityIntent.putExtras(bundle);
+//        newsDetailsActivityIntent.putExtra(NEWS_ITEM, item);
         activity.startActivity(newsDetailsActivityIntent);
     }
 
@@ -37,8 +40,9 @@ public class NewsDetailsActivity extends AppCompatActivity {
         newsTextView = findViewById(R.id.news_details_text);
         dateView = findViewById(R.id.news_details_date);
 
-        NewsItem item = (NewsItem) getIntent().getSerializableExtra(NEWS_ITEM);
-        setDataFromNewsItem(item);
+        Bundle bundle = getIntent().getExtras();
+        NewsItem item = (NewsItem) bundle.getSerializable(NEWS_ITEM);
+        if (item != null) setDataFromNewsItem(item);
     }
 
     private void setDataFromNewsItem(NewsItem newsItem){

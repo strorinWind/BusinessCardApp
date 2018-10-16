@@ -1,11 +1,14 @@
 package ru.strorin.businesscardapp.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.io.Serializable;
 import java.util.Date;
 
-public class NewsItem implements Serializable {
+public class NewsItem implements Serializable, Parcelable {
 
     private final String title;
     private final String imageUrl;
@@ -51,4 +54,37 @@ public class NewsItem implements Serializable {
     public String getFullText() {
         return fullText;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(imageUrl);
+        dest.writeSerializable(category);
+        dest.writeSerializable(publishDate);
+        dest.writeString(previewText);
+        dest.writeString(fullText);
+    }
+
+    public static final Creator<NewsItem> CREATOR = new Creator<NewsItem>() {
+        @Override
+        public NewsItem createFromParcel(Parcel source) {
+            String title = source.readString();
+            String imageUrl = source.readString();
+            Category category = (Category) source.readSerializable();
+            Date publishDate = (Date) source.readSerializable();
+            String previewText = source.readString();
+            String fullText = source.readString();
+            return new NewsItem(title, imageUrl, category, publishDate, previewText, fullText);
+        }
+
+        @Override
+        public NewsItem[] newArray(int size) {
+            return new NewsItem[size];
+        }
+    };
 }
