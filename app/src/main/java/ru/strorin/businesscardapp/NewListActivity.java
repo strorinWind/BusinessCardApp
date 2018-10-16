@@ -32,7 +32,7 @@ public class NewListActivity extends AppCompatActivity {
     private static final String TAG = NewListActivity.class.getCanonicalName();
 
     private List<NewsItem> news = new ArrayList<>();
-    private NewsItemRecyclerAdapter adapter;
+    private volatile NewsItemRecyclerAdapter adapter;
     private ProgressBar progressBar;
 
     private Disposable observer;
@@ -89,6 +89,7 @@ public class NewListActivity extends AppCompatActivity {
         observer = Observable.zip(delay,
                 Observable.fromIterable(DataUtils.generateNews()),
                 (d, newsItem) -> newsItem)
+                .filter(x -> !adapter.contains(x))
                 .doOnNext(item -> Log.d(TAG, Thread.currentThread().toString()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

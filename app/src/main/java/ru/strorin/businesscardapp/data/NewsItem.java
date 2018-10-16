@@ -7,6 +7,7 @@ import org.ocpsoft.prettytime.PrettyTime;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 public class NewsItem implements Serializable, Parcelable {
 
@@ -27,22 +28,21 @@ public class NewsItem implements Serializable, Parcelable {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!NewsItem.class.isAssignableFrom(obj.getClass())) {
-            return false;
-        }
-        NewsItem item = (NewsItem)obj;
-        if (!title.equals(item.getTitle())) return false;
-        if (!imageUrl.equals(item.getImageUrl())) return false;
-        if (!category.equals(item.getCategory())) return false;
-        if (!publishDate.equals(item.getPublishDate())) return false;
-        if (!previewText.equals(item.getPreviewText())) return false;
-        if (!fullText.equals(item.getFullText())) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NewsItem newsItem = (NewsItem) o;
+        return Objects.equals(title, newsItem.title) &&
+                Objects.equals(imageUrl, newsItem.imageUrl) &&
+                Objects.equals(category, newsItem.category) &&
+                Objects.equals(publishDate, newsItem.publishDate) &&
+                Objects.equals(previewText, newsItem.previewText) &&
+                Objects.equals(fullText, newsItem.fullText);
+    }
 
-        return true;
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, imageUrl, category, publishDate, previewText, fullText);
     }
 
     public String getTitle() {
