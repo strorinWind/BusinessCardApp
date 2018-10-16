@@ -11,6 +11,20 @@ public class Category implements Serializable {
         this.name = name;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!Category.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        Category category = (Category) obj;
+        if (id != category.getId()) return false;
+        if (!name.equals(category.getName())) return false;
+        return true;
+    }
+
     public int getId() {
         return id;
     }

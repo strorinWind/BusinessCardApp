@@ -59,6 +59,19 @@ public class NewsItemRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder
         void onItemClick(NewsItem newsItem);
     }
 
+    public int getPosition(NewsItem newsItem){
+        for (int i = 0; i < news.size(); i++){
+            if (news.get(i).equals(newsItem)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public boolean contains(NewsItem newsItem){
+        return getPosition(newsItem) != -1;
+    }
+
     public void setDataset(List<NewsItem> newsList){
         news.clear();
         news.addAll(newsList);

@@ -2,7 +2,6 @@ package ru.strorin.businesscardapp;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,16 +9,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.dgreenhalgh.android.simpleitemdecoration.grid.GridDividerItemDecoration;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,6 +28,7 @@ import ru.strorin.businesscardapp.data.NewsItem;
 
 public class NewListActivity extends AppCompatActivity {
     private static final String NEWS_LIST = "NEWS_LIST";
+    private static final String NEWS_LOADED = "NEWS_LOADED";
     private static final String TAG = NewListActivity.class.getCanonicalName();
 
     private List<NewsItem> news = new ArrayList<>();
@@ -40,6 +36,7 @@ public class NewListActivity extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private Disposable observer;
+    private boolean newsLoaded;
 
     private final NewsItemRecyclerAdapter.OnItemClickListener clickListener = newsItem -> {
         NewsDetailsActivity.start(this, newsItem);
@@ -50,18 +47,25 @@ public class NewListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_list);
         progressBar = findViewById(R.id.progress_bar);
-        progressBar.setProgress(0);
 
         adapter = new NewsItemRecyclerAdapter(this, news, clickListener);
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         setRecyclerViewDecoration(recyclerView);
 
         if (savedInstanceState == null){
+            newsLoaded = false;
             getNews();
         }
         else {
             news = savedInstanceState.getParcelableArrayList(NEWS_LIST);
+            newsLoaded = savedInstanceState.getBoolean(NEWS_LOADED);
+            adapter.setDataset(news);
+            if (!newsLoaded){
+                getNews();
+            }
+            else hideProgressBar();
         }
     }
 
@@ -69,12 +73,15 @@ public class NewListActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(NEWS_LIST, (ArrayList<NewsItem>) news);
+        outState.putBoolean(NEWS_LOADED, newsLoaded);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        observer.dispose();
+        if (newsLoaded && observer != null){
+            observer.dispose();
+        }
     }
 
     private void getNews() {
@@ -82,16 +89,20 @@ public class NewListActivity extends AppCompatActivity {
         observer = Observable.zip(delay,
                 Observable.fromIterable(DataUtils.generateNews()),
                 (d, newsItem) -> newsItem)
-                .doOnNext(item -> Log.e(TAG, Thread.currentThread().toString()))
+                .doOnNext(item -> Log.d(TAG, Thread.currentThread().toString()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(this::loadItem, e -> {}, this::hideProgressBar);
+                .subscribe(this::loadItem, e -> {}, () -> {
+                    hideProgressBar();
+                    newsLoaded = true;
+                });
     }
 
     private void loadItem(NewsItem newsItem){
-        adapter.addItem(newsItem);
-        int progress = progressBar.getProgress() + 10;
-        progressBar.setProgress(progress);
+        if (!adapter.contains(newsItem)){
+            adapter.addItem(newsItem);
+            adapter.notifyItemInserted(adapter.getPosition(newsItem));
+        }
     }
 
     private void hideProgressBar(){
@@ -100,22 +111,13 @@ public class NewListActivity extends AppCompatActivity {
 
     private void setRecyclerViewDecoration(RecyclerView recyclerView){
         int orientation = getResources().getConfiguration().orientation;
-
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             recyclerView.setLayoutManager(layoutManager);
-
-            DividerItemDecoration itemDecoration = new DividerItemDecoration(recyclerView.getContext(), layoutManager.getOrientation());
-            itemDecoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.divider));
-            recyclerView.addItemDecoration(itemDecoration);
         }
         else {
             int numColumns = 2;
             recyclerView.setLayoutManager(new GridLayoutManager(this, numColumns));
-
-            Drawable divider = ContextCompat.getDrawable(this, R.drawable.divider);
-            GridDividerItemDecoration itemDecoration = new GridDividerItemDecoration(divider, divider, numColumns);
-            recyclerView.addItemDecoration(itemDecoration);
         }
     }
 

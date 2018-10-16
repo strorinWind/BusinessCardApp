@@ -26,6 +26,25 @@ public class NewsItem implements Serializable, Parcelable {
         this.fullText = fullText;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!NewsItem.class.isAssignableFrom(obj.getClass())) {
+            return false;
+        }
+        NewsItem item = (NewsItem)obj;
+        if (!title.equals(item.getTitle())) return false;
+        if (!imageUrl.equals(item.getImageUrl())) return false;
+        if (!category.equals(item.getCategory())) return false;
+        if (!publishDate.equals(item.getPublishDate())) return false;
+        if (!previewText.equals(item.getPreviewText())) return false;
+        if (!fullText.equals(item.getFullText())) return false;
+
+        return true;
+    }
+
     public String getTitle() {
         return title;
     }
