@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Category implements Serializable {
+
     private final int id;
     private final String name;
 

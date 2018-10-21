@@ -1,4 +1,4 @@
-package ru.strorin.businesscardapp;
+package ru.strorin.businesscardapp.news;
 
 import android.content.Context;
 import android.view.View;
@@ -14,9 +14,11 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import ru.strorin.businesscardapp.R;
 import ru.strorin.businesscardapp.data.NewsItem;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
+
     @NonNull
     private final RequestManager imageLoader;
 
@@ -25,7 +27,6 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     private final TextView headerView;
     private final TextView previewView;
     private final TextView dateView;
-
 
     NewsViewHolder(View itemView, @Nullable NewsItemRecyclerAdapter.OnItemClickListener listener,
                    Context context, List<NewsItem> news) {

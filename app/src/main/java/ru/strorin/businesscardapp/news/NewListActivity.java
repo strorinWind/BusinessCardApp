@@ -1,4 +1,4 @@
-package ru.strorin.businesscardapp;
+package ru.strorin.businesscardapp.news;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -22,17 +22,21 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import ru.strorin.businesscardapp.about.AboutActivity;
+import ru.strorin.businesscardapp.details.NewsDetailsActivity;
+import ru.strorin.businesscardapp.R;
 import ru.strorin.businesscardapp.data.DataUtils;
 import ru.strorin.businesscardapp.data.NewsItem;
 
 
 public class NewListActivity extends AppCompatActivity {
+
     private static final String NEWS_LIST = "NEWS_LIST";
     private static final String NEWS_LOADED = "NEWS_LOADED";
     private static final String TAG = NewListActivity.class.getCanonicalName();
 
     private List<NewsItem> news = new ArrayList<>();
-    private volatile NewsItemRecyclerAdapter adapter;
+    private NewsItemRecyclerAdapter adapter;
     private ProgressBar progressBar;
 
     private Disposable observer;
@@ -62,10 +66,12 @@ public class NewListActivity extends AppCompatActivity {
             news = savedInstanceState.getParcelableArrayList(NEWS_LIST);
             newsLoaded = savedInstanceState.getBoolean(NEWS_LOADED);
             adapter.setDataset(news);
-            if (!newsLoaded){
+            if (newsLoaded){
+                hideProgressBar();
+            }
+            else {
                 getNews();
             }
-            else hideProgressBar();
         }
     }
 
@@ -78,17 +84,18 @@ public class NewListActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         if (newsLoaded && observer != null){
             observer.dispose();
         }
+        super.onDestroy();
     }
 
     private void getNews() {
         Observable<? extends Long> delay = Observable.interval(2, TimeUnit.SECONDS);
-        observer = Observable.zip(delay,
-                Observable.fromIterable(DataUtils.generateNews()),
-                (d, newsItem) -> newsItem)
+        observer = Observable.zip(
+                    delay,
+                    Observable.fromIterable(DataUtils.generateNews()),
+                    (d, newsItem) -> newsItem)
                 .filter(x -> !adapter.contains(x))
                 .doOnNext(item -> Log.d(TAG, Thread.currentThread().toString()))
                 .subscribeOn(Schedulers.io())

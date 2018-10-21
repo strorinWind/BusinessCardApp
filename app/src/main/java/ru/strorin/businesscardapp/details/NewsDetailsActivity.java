@@ -1,4 +1,4 @@
-package ru.strorin.businesscardapp;
+package ru.strorin.businesscardapp.details;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,9 +11,11 @@ import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 
 import androidx.appcompat.app.AppCompatActivity;
+import ru.strorin.businesscardapp.R;
 import ru.strorin.businesscardapp.data.NewsItem;
 
 public class NewsDetailsActivity extends AppCompatActivity {
+
     private static final String NEWS_ITEM = "NEWS_ITEM";
 
     private ImageView newsImageView;
@@ -26,7 +28,6 @@ public class NewsDetailsActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable(NEWS_ITEM, item);
         newsDetailsActivityIntent.putExtras(bundle);
-//        newsDetailsActivityIntent.putExtra(NEWS_ITEM, item);
         activity.startActivity(newsDetailsActivityIntent);
     }
 

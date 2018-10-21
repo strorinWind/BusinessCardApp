@@ -1,4 +1,4 @@
-package ru.strorin.businesscardapp;
+package ru.strorin.businesscardapp.news;
 
 
 import android.content.Context;
@@ -11,9 +11,11 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import ru.strorin.businesscardapp.R;
 import ru.strorin.businesscardapp.data.NewsItem;
 
 public class NewsItemRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder> {
+
     @NonNull
     private List<NewsItem> news;
     @NonNull
@@ -22,7 +24,6 @@ public class NewsItemRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder
     private final OnItemClickListener clickListener;
 
     private Context context;
-
 
     NewsItemRecyclerAdapter(@NonNull Context cont, @NonNull List<NewsItem> newsList,
                             @Nullable OnItemClickListener listener) {
@@ -40,8 +41,10 @@ public class NewsItemRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder
     @Override
     public NewsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new NewsViewHolder(
-                inflater.inflate(R.layout.news_item_card, parent, false), clickListener,
-                context, news
+                inflater.inflate(R.layout.news_item_card, parent, false),
+                clickListener,
+                context,
+                news
         );
     }
 

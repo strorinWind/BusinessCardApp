@@ -1,4 +1,4 @@
-package ru.strorin.businesscardapp;
+package ru.strorin.businesscardapp.about;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,8 +9,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import ru.strorin.businesscardapp.R;
 
 public class AboutActivity extends AppCompatActivity {
+
     private static final String[] EXTRA_EMAIL_ADDRESSES = {"strorinw@gmail.com"};
     private static final String EXTRA_EMAIL_SUBJECT = "Feedback";
 
