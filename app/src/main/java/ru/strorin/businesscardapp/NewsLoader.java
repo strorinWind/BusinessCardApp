@@ -2,17 +2,21 @@ package ru.strorin.businesscardapp;
 
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 import ru.strorin.businesscardapp.data.DataUtils;
+import ru.strorin.businesscardapp.data.NewsItem;
 
 public class NewsLoader {
     private static final String TAG = NewsLoader.class.getCanonicalName();
 
     private static final NewsLoader newsInstance = new NewsLoader();
     private Observable observer;
+    private List<NewsItem> news = new ArrayList<NewsItem>();
 
     static NewsLoader getInstance() {
         return newsInstance;

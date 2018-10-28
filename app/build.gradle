@@ -29,7 +29,11 @@ dependencies {
 
     implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-    implementation 'com.github.bumptech.glide:glide:4.4.0'
-    implementation 'com.bignerdranch.android:simple-item-decoration:1.0.0'
+
+    implementation "com.github.bumptech.glide:glide:$versionGlide"
+    implementation "com.squareup.retrofit2:retrofit:$versionRetrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$versionRetrofit"
+    implementation "com.squareup.okhttp3:logging-interceptor:$versionOkHttpLogingInterceptor"
+
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
 }
