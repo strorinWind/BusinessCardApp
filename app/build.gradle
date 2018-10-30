@@ -33,6 +33,7 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$versionGlide"
     implementation "com.squareup.retrofit2:retrofit:$versionRetrofit"
     implementation "com.squareup.retrofit2:converter-gson:$versionRetrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$versionRetrofit"
     implementation "com.squareup.okhttp3:logging-interceptor:$versionOkHttpLogingInterceptor"
 
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'

@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import ru.strorin.businesscardapp.R;
-import ru.strorin.businesscardapp.data.NewsItem;
+import ru.strorin.businesscardapp.data.network.dto.NewsDTO;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
 
@@ -29,7 +29,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     private final TextView dateView;
 
     NewsViewHolder(View itemView, @Nullable NewsItemRecyclerAdapter.OnItemClickListener listener,
-                   Context context, List<NewsItem> news) {
+                   Context context, List<NewsDTO> news) {
         super(itemView);
         newsImageView = itemView.findViewById(R.id.news_image);
         categoryView = itemView.findViewById(R.id.category_text);
@@ -49,9 +49,9 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    void bind(NewsItem newsItem) {
+    void bind(NewsDTO newsItem) {
         imageLoader.load(newsItem.getImageUrl()).into(newsImageView);
-        categoryView.setText(newsItem.getCategory().getName());
+        categoryView.setText(newsItem.getCategory());
         headerView.setText(newsItem.getTitle());
         previewView.setText(newsItem.getPreviewText());
         dateView.setText(newsItem.getPrettyDateString());

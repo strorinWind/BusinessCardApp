@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions;
 import androidx.appcompat.app.AppCompatActivity;
 import ru.strorin.businesscardapp.R;
 import ru.strorin.businesscardapp.data.NewsItem;
+import ru.strorin.businesscardapp.data.network.dto.NewsDTO;
 
 public class NewsDetailsActivity extends AppCompatActivity {
 
@@ -23,7 +24,7 @@ public class NewsDetailsActivity extends AppCompatActivity {
     private TextView newsTextView;
     private TextView dateView;
 
-    public static void start(Activity activity, NewsItem item){
+    public static void start(Activity activity, NewsDTO item){
         Intent newsDetailsActivityIntent = new Intent(activity, NewsDetailsActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(NEWS_ITEM, item);
