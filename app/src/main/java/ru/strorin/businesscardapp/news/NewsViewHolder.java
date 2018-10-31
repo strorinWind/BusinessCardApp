@@ -50,10 +50,17 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     }
 
     void bind(NewsDTO newsItem) {
-        imageLoader.load(newsItem.getImageUrl()).into(newsImageView);
-        categoryView.setText(newsItem.getCategory());
         headerView.setText(newsItem.getTitle());
         previewView.setText(newsItem.getPreviewText());
         dateView.setText(newsItem.getPrettyDateString());
+
+        categoryView.setText(newsItem.getCategory());
+
+        if (newsItem.getImageUrl() != null) {
+            imageLoader.load(newsItem.getImageUrl()).into(newsImageView);
+        }
+        else {
+            newsImageView.setImageResource(R.drawable.image_placeholder);
+        }
     }
 }

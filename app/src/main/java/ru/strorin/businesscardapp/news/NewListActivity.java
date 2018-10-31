@@ -64,13 +64,32 @@ public class NewListActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //setupUx();
+        setupUx();
         loadNews();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unbindUx();
+        compositeDisposable.clear();
+    }
+
+    private void unbindUx() {
+        btnTryAgain.setOnClickListener(null);
     }
 
     private void setupUi() {
         findViews();
         setupRecyclerViews();
+    }
+
+    private void setupUx() {
+        btnTryAgain.setOnClickListener(v -> onClickTryAgain());
+    }
+
+    private void onClickTryAgain() {
+        loadNews();
     }
 
     private void loadNews(){

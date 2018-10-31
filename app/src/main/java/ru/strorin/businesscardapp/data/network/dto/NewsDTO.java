@@ -34,6 +34,9 @@ public class NewsDTO implements Serializable {
     }
 
     public String getImageUrl() {
+        if (multimedia.isEmpty()) {
+            return null;
+        }
         return multimedia.get(0).getUrl();
     }
 
