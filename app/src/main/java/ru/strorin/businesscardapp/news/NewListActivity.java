@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,7 +45,9 @@ public class NewListActivity extends AppCompatActivity {
     private View viewError;
     private View viewLoading;
     private View viewNoData;
+    private TextView sectionChooser;
     private TextView tvError;
+    private AlertDialog chooseDialog;
 
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -82,21 +85,43 @@ public class NewListActivity extends AppCompatActivity {
     private void setupUi() {
         findViews();
         setupRecyclerViews();
+        setupSectionChooser();
     }
 
     private void setupUx() {
         btnTryAgain.setOnClickListener(v -> onClickTryAgain());
+        sectionChooser.setOnClickListener(v -> onClickChooseSection());
     }
 
     private void onClickTryAgain() {
         loadNews();
     }
 
+    private void onClickChooseSection(){
+
+        ArrayList<String> items = new ArrayList<>();
+        for (Section item : Section.values()) {
+            items.add(item.name());
+        }
+        CharSequence[] lst = items.toArray(new CharSequence[items.size()]);
+
+        // Creating and Building the Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select news section");
+        builder.setSingleChoiceItems(lst, -1, (dialog, item) -> {
+            sectionChooser.setText((Section.values()[item]).name());
+            chooseDialog.dismiss();
+            loadNews();
+        });
+        chooseDialog = builder.create();
+        chooseDialog.show();
+    }
+
     private void loadNews(){
         showState(State.Loading);
         final Disposable searchDisposable = NewsLoader.getInstance()
                 .news()
-                .topStories()
+                .topStories(sectionChooser.getText().toString().toLowerCase())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::checkResponseAndShowState, this::handleError);
@@ -109,18 +134,6 @@ public class NewListActivity extends AppCompatActivity {
             return;
         }
         showState(State.ServerError);
-    }
-
-    private void setRecyclerViewDecoration(RecyclerView recyclerView){
-        int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            recyclerView.setLayoutManager(layoutManager);
-        }
-        else {
-            int numColumns = 2;
-            recyclerView.setLayoutManager(new GridLayoutManager(this, numColumns));
-        }
     }
 
     @Override
@@ -226,6 +239,22 @@ public class NewListActivity extends AppCompatActivity {
         rvNews.setAdapter(newsAdapter);
     }
 
+    private void setRecyclerViewDecoration(RecyclerView recyclerView){
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(layoutManager);
+        }
+        else {
+            int numColumns = 2;
+            recyclerView.setLayoutManager(new GridLayoutManager(this, numColumns));
+        }
+    }
+
+    private void setupSectionChooser() {
+        sectionChooser.setText(Section.Home.toString());
+    }
+
     private void findViews() {
         rvNews = findViewById(R.id.rv_news);
         btnTryAgain = findViewById(R.id.btn_try_again);
@@ -233,5 +262,6 @@ public class NewListActivity extends AppCompatActivity {
         viewLoading = findViewById(R.id.lt_loading);
         viewNoData = findViewById(R.id.lt_no_data);
         tvError = findViewById(R.id.tv_error);
+        sectionChooser = findViewById(R.id.section_chooser);
     }
 }
