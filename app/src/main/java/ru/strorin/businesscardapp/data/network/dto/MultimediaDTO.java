@@ -2,7 +2,9 @@ package ru.strorin.businesscardapp.data.network.dto;
 
 import com.google.gson.annotations.SerializedName;
 
-public class MultimediaDTO {
+import java.io.Serializable;
+
+public class MultimediaDTO implements Serializable{
 
     @SerializedName("url")
     private String url;
