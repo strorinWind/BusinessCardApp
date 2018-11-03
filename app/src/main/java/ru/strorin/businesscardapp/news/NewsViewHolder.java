@@ -54,7 +54,13 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         previewView.setText(newsItem.getPreviewText());
         dateView.setText(newsItem.getPrettyDateString());
 
-        categoryView.setText(newsItem.getCategory());
+        String categoryText = newsItem.getCategory();
+        if (categoryText == null || categoryText.isEmpty() || categoryText.equals("")){
+            categoryView.setVisibility(View.GONE);
+        }
+        else {
+            categoryView.setText(newsItem.getCategory());
+        }
 
         if (newsItem.getImageUrl() != null) {
             imageLoader.load(newsItem.getImageUrl()).into(newsImageView);
