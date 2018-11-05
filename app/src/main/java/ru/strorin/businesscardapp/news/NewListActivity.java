@@ -1,5 +1,6 @@
 package ru.strorin.businesscardapp.news;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -56,6 +57,11 @@ public class NewListActivity extends AppCompatActivity {
     private final NewsItemRecyclerAdapter.OnItemClickListener clickListener = newsItem -> {
         NewsDetailsActivity.start(this, newsItem);
     };
+
+    public static void start(Activity activity){
+        Intent newsDetailsActivityIntent = new Intent(activity, NewListActivity.class);
+        activity.startActivity(newsDetailsActivityIntent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

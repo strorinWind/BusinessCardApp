@@ -18,4 +18,7 @@
     <dimen name="news_text_size">14sp</dimen>
 
     <dimen name="divider_size">4dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="welcome_text_size">20sp</dimen>
 </resources>
