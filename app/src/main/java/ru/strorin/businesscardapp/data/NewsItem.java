@@ -9,11 +9,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import ru.strorin.businesscardapp.data.network.dto.NewsDTO;
+
 public class NewsItem implements Serializable, Parcelable {
 
     private final String title;
     private final String imageUrl;
-    private final Category category;
+    private final String category;
     private final Date publishDate;
     private final String previewText;
     private final String fullText;
@@ -21,10 +23,19 @@ public class NewsItem implements Serializable, Parcelable {
     public NewsItem(String title, String imageUrl, Category category, Date publishDate, String previewText, String fullText) {
         this.title = title;
         this.imageUrl = imageUrl;
-        this.category = category;
+        this.category = category.getName();
         this.publishDate = publishDate;
         this.previewText = previewText;
         this.fullText = fullText;
+    }
+
+    public NewsItem(NewsDTO news){
+        this.title = news.getTitle();
+        this.imageUrl = news.getImageUrl();
+        this.category = news.getCategory();
+        this.publishDate = news.getPublishDate();
+        this.previewText = news.getPreviewText();
+        this.fullText = "";
     }
 
     @Override
@@ -53,7 +64,7 @@ public class NewsItem implements Serializable, Parcelable {
         return imageUrl;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
@@ -107,3 +118,4 @@ public class NewsItem implements Serializable, Parcelable {
         }
     };
 }
+
