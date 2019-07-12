@@ -5,9 +5,14 @@
     <string name="hse_description">Student</string>
     <string name="person_description">Anastasia studies in university for Bachelor degree.
         At the moment she works at Kaspersky Lab as an Intern in automated testing.</string>
-    <string name="text_input_hint">Enter a message...</string>
+    <string name="text_input_hint">Enter a message…</string>
     <string name="send_button_text">Send message</string>
     <string name="no_email_app_error">No Email app found</string>
     <string name="no_web_browser_error">No web browser found</string>
     <string name="about_title">About</string>
+
+    <string name="error_network">Network error. Please check your network connection and try again</string>
+    <string name="error_server">Server error. Probably sample token is done</string>
+    <string name="error_data_is_empty">There is no data for your request</string>
+    <string name="btn_try_again">Try again</string>
 </resources>

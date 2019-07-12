@@ -3,6 +3,9 @@
 buildscript {
     ext {
         jetVersion = '1.0.0'
+        versionRetrofit = '2.4.0'
+        versionOkHttpLogingInterceptor = '3.6.0'
+        versionGlide = '4.8.0'
     }
     
     repositories {

@@ -12,12 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import ru.strorin.businesscardapp.R;
-import ru.strorin.businesscardapp.data.NewsItem;
+import ru.strorin.businesscardapp.data.network.dto.NewsDTO;
 
 public class NewsItemRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
     @NonNull
-    private List<NewsItem> news;
+    private List<NewsDTO> news = new ArrayList<>();
     @NonNull
     private final LayoutInflater inflater;
     @Nullable
@@ -25,14 +25,7 @@ public class NewsItemRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder
 
     private Context context;
 
-    NewsItemRecyclerAdapter(@NonNull Context cont, @NonNull List<NewsItem> newsList,
-                            @Nullable OnItemClickListener listener) {
-        if (newsList != null){
-            news = newsList;
-        }
-        else {
-            news = new ArrayList<>();
-        }
+    NewsItemRecyclerAdapter(@NonNull Context cont, @Nullable OnItemClickListener listener) {
         context = cont;
         inflater = LayoutInflater.from(context);
         clickListener = listener;
@@ -59,10 +52,10 @@ public class NewsItemRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder
     }
 
     public interface OnItemClickListener {
-        void onItemClick(NewsItem newsItem);
+        void onItemClick(NewsDTO newsItem);
     }
 
-    public int getPosition(NewsItem newsItem){
+    public int getPosition(NewsDTO newsItem){
         for (int i = 0; i < news.size(); i++){
             if (news.get(i).equals(newsItem)){
                 return i;
@@ -71,17 +64,17 @@ public class NewsItemRecyclerAdapter extends RecyclerView.Adapter<NewsViewHolder
         return -1;
     }
 
-    public boolean contains(NewsItem newsItem){
+    public boolean contains(NewsDTO newsItem){
         return getPosition(newsItem) != -1;
     }
 
-    public void setDataset(List<NewsItem> newsList){
+    public void setDataset(List<NewsDTO> newsList){
         news.clear();
         news.addAll(newsList);
         notifyDataSetChanged();
     }
 
-    public void addItem(NewsItem item){
+    public void addItem(NewsDTO item){
         news.add(item);
         notifyItemInserted(news.indexOf(item));
     }
